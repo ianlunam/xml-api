@@ -1,7 +1,4 @@
-import connexion
-import json
 import requests
-import six
 from typing import Dict
 from typing import Tuple
 from typing import Union
@@ -28,7 +25,7 @@ def companies_id_get(id_):  # noqa: E501
             xmldoc = ET.fromstring(response.text)
             return Company(id=int(xmldoc.find('id').text), name=xmldoc.find('name').text, description=xmldoc.find('description').text)
         except:
-            return Error(error="Errorish", error_description="It's a bloody error").__str__()
+            return Error(error="500", error_description="Invalid response from backend server").__str__()
     else:
         return Error(error="404", error_description="No such company")
 
